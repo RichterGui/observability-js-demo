@@ -1,0 +1,86 @@
+{
+  "id": null,
+  "title": "Observabilidade - App Express",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Percentis de Duração de Requisições HTTP",
+      "gridPos": {"x": 0, "y": 0, "w": 12, "h": 6},
+      "targets": [
+        {"expr": "histogram_quantile(0.50, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "P50"},
+        {"expr": "histogram_quantile(0.90, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "P90"},
+        {"expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "P95"},
+        {"expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "P99"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "s"}},
+      "options": {"legend": {"displayMode": "list", "placement": "bottom"}, "tooltip": {"mode": "multi"}},
+      "xaxis": {"mode": "time"},
+      "yaxes": [{"label": "Duração (segundos)", "format": "s"}]
+    },
+    {
+      "type": "table",
+      "title": "Resumo Atual dos Percentis",
+      "gridPos": {"x": 12, "y": 0, "w": 12, "h": 6},
+      "targets": [
+        {"expr": "histogram_quantile(0.50, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "P50"},
+        {"expr": "histogram_quantile(0.90, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "P90"},
+        {"expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "P95"},
+        {"expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "P99"}
+      ],
+      "transformations": [{"id": "seriesToRows", "options": {}}],
+      "fieldConfig": {"defaults": {"unit": "s"}}
+    }
+  ],
+  "schemaVersion": 27,
+  "version": 1
+}
+
+
+
+v2
+
+{
+  "id": null,
+  "title": "Observabilidade - App Express",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Percentis de Duração de Requisições HTTP",
+      "gridPos": {"x": 0, "y": 0, "w": 12, "h": 6},
+      "targets": [
+        {"expr": "histogram_quantile(0.50, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "P50"},
+        {"expr": "histogram_quantile(0.90, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "P90"},
+        {"expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "P95"},
+        {"expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "P99"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "s"}},
+      "options": {"legend": {"displayMode": "list", "placement": "bottom"}, "tooltip": {"mode": "multi"}},
+      "xaxis": {"mode": "time"},
+      "yaxes": [{"label": "Duração (segundos)", "format": "s"}]
+    },
+    {
+      "type": "table",
+      "title": "Resumo Atual dos Percentis",
+      "gridPos": {"x": 12, "y": 0, "w": 12, "h": 6},
+      "targets": [
+        {"expr": "histogram_quantile(0.50, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "P50"},
+        {"expr": "histogram_quantile(0.90, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "P90"},
+        {"expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "P95"},
+        {"expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "P99"}
+      ],
+      "transformations": [{"id": "seriesToRows", "options": {}}],
+      "fieldConfig": {"defaults": {"unit": "s"}}
+    },
+    {
+      "type": "logs",
+      "title": "Logs Recentes do App",
+      "gridPos": {"x": 0, "y": 6, "w": 24, "h": 6},
+      "targets": [
+        {"expr": "{job=\"app\"}", "refId": "A"}
+      ],
+      "options": {"showLabels": true, "wrapLogMessage": true}
+    }
+  ],
+  "schemaVersion": 27,
+  "version": 1
+}
